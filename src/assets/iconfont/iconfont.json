@@ -1,0 +1,58 @@
+{
+  "id": "3525487",
+  "name": "blogs",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1537257",
+      "name": "duck",
+      "font_class": "duck1",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "3887135",
+      "name": "鸭子 duck",
+      "font_class": "duck2",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "8744428",
+      "name": "10-duck",
+      "font_class": "duck3",
+      "unicode": "e757",
+      "unicode_decimal": 59223
+    },
+    {
+      "icon_id": "3842449",
+      "name": "duck",
+      "font_class": "duck",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "30520918",
+      "name": "首页",
+      "font_class": "index",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "30524855",
+      "name": "编辑",
+      "font_class": "edit",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "30529219",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

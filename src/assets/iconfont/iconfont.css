@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3525487 */
+  /* Color fonts */
+  src: 
+       url('iconfont.woff2?t=1657881251162') format('woff2'),
+       url('iconfont.woff?t=1657881251162') format('woff'),
+       url('iconfont.ttf?t=1657881251162') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-duck1:before {
+  content: "\e669";
+  font-size: 50px;
+}
+
+.icon-duck2:before {
+  content: "\e620";
+  font-size: 50px;
+}
+
+.icon-duck3:before {
+  content: "\e757";
+  font-size: 50px;
+}
+
+.icon-duck:before {
+  content: "\e624";
+  font-size: 50px;
+}
+
+.icon-index:before {
+  content: "\e600";
+}
+
+.icon-edit:before {
+  content: "\e601";
+}
+
+.icon-user:before {
+  content: "\e602";
+  font-size: 30px;
+}
+
