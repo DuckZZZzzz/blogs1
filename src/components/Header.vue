@@ -21,16 +21,14 @@
           <div class="duck">
             <a href=""><i class="iconfont icon-duck"></i></a>
           </div>
-          <p>
-            <router-link to="/add">+</router-link>
-            <div class="user">
-        <img class="avatar" :src="user.avatar" :alt="user.username" :title="user.username">
-        <ul>
-          <li><router-link to="/my">我的</router-link></li>
-          <li><a href="#" @click="onLogout">注销</a></li>
-        </ul>
-      </div>         
-          </p>
+          <div class="add"><router-link to="/add">+</router-link></div>
+          <div class="user">
+            <img class="avatar" :src="user.avatar" :alt="user.username" :title="user.username">
+            <ul>
+              <li><router-link to="/my">我的</router-link></li>
+              <li><a href="#" @click="onLogout">注销</a></li>
+            </ul>
+          </div>         
         </div>
       </div>
     </template> 
@@ -118,29 +116,51 @@
       display: flex;
       align-items: center;
       padding: 0 80px;
-      font-size: 30px;
       height: 100px;
       box-shadow: 0 1px 5px #465655;
       background: linear-gradient(145deg,#e3fffd 0,#b7e9e6 100%);
       .duck {
         flex: 1;
-        display: flex;
         justify-content: flex-start;
         height: 98px;
         align-items: center;
+      }
+      .add {
+        font-size: 50px;
+      }
+      .user {
+        position: relative;
+        .avatar {
+          width: 50px;
+          height: 50px;
+          padding-left: 20px;
+        }
+        ul {
+          display: none;
+          position: absolute;
+          list-style: none;
+          background-color: #fff;
+          margin: 0;
+          padding: 0;
+          top: 50px;
+          right: 5px;
+          text-align: center;
+          font-size: 15px;
+        li {
+          padding: 3px 5px;
+          border: 1px solid #eaeaea;
+        }
         a {
-          display: inline-block;
-          width: 100px;
+            color: #007974;
+            font-size: 15px;
+          }
+        }
+
+        &:hover ul{
+          display: block;
         }
       }
-      p {
-        width: 600px;
-        text-align: end;
-        a {
-          color: #007974;
-          margin-left: 20px;
-        }
-      }
+
     }
 
   }

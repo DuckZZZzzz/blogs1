@@ -9,19 +9,19 @@ const URL = {
 
 export default {
   register({username, password}) {
-    return request(URL.REGISTER, 'POST', { username, password })
+    return request( 'POST', URL.REGISTER, { username, password })
   },
 
   login({username, password}) {
-    return request(URL.LOGIN, 'POST', { username, password })
+    return request( 'POST', URL.LOGIN, { username, password })
   },
 
   logout() {
     localStorage.removeItem('token')
-    return request(URL.LOGOUT)
+    return request('GET', URL.LOGOUT)
   },
 
   getInfo() {
-    return request(URL.GET_INFO)
+    return request('GET', URL.GET_INFO)
   }
 }

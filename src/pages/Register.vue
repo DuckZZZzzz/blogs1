@@ -1,23 +1,29 @@
 <template>
   <div class="register">
-      <input v-model="input" placeholder="请输入用户名">
-      <input placeholder="请输入密码" v-model="input" show-password>
-      <button onclick="onLogin">注册</button>
+      <input v-model="username" placeholder="请输入用户名">
+      <input type="password" placeholder="请输入密码" v-model="password" show-password @keyup.enter="onRegister">
+      <button @click="onRegister">注册</button>
   </div>
 </template>
 
 <script>
-import Auth from '../api/auth'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      input: ''
+      username: '',
+      password: ''
     }
   },
   methods: {
-    onLogin() {
-      return Auth.login({username, password})
+    ...mapActions(['register']),
+    onRegister() {
+      this.register({username: this.username, password: this.password})
+        .then(()=>{
+          this.$router.push({path: this.$route.query.redirect || '/blogs'})
+          console.log(this.$router, this.$route)
+        })
     }
   }
 }

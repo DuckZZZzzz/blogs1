@@ -10,7 +10,7 @@ const URL = {
 
 export default {
   getBlogs({ page=1, userId, atIndex } = { page: 1 }) {
-    return request(URL.GET_LIST, 'GET', { page, userId, atIndex })
+    return request( 'GET', URL.GET_LIST, { page, userId, atIndex })
   },
 
   getIndexBlogs({ page=1 } = { page: 1}) {
@@ -22,19 +22,19 @@ export default {
   },
 
   getDetail({ blogId }) {
-    return request(URL.GET_DETAIL.replace(':blogId', blogId))
+    return request( 'GET', URL.GET_DETAIL.replace(':blogId', blogId))
   },
 
   updateBlog({ blogId }, { title, content, description, atIndex }) {
-    return request(URL.UPDATE.replace(':blogId', blogId), 'PATCH', { title, content, description, atIndex })
+    return request( 'PATCH', URL.UPDATE.replace(':blogId', blogId), { title, content, description, atIndex })
   },
 
   deleteBlog({ blogId }) {
-    return request(URL.DELETE.replace(':blogId', blogId), 'DELETE')
+    return request( 'DELETE', URL.DELETE.replace(':blogId', blogId))
   },
 
   createBlog({ title = '', content = '', description = '', atIndex = false} = { title: '', content: '', description: '', atIndex: false}) {
-    return request(URL.CREATE, 'POST', { title, content, description, atIndex })
+    return request( 'POST', URL.CREATE, { title, content, description, atIndex })
   }
 
 }

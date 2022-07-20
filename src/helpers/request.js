@@ -10,7 +10,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 export default function request(type='GET', url, data={}) {
   return new Promise((resolve, reject) => {
     let option = {
-      url, 
+      url,
       method: type,
     }
     if(type.toLowerCase() === 'get') {
@@ -21,22 +21,23 @@ export default function request(type='GET', url, data={}) {
     if(localStorage.token) {
       axios.defaults.headers.common['Authorization']  = localStorage.token
     }
+ 
     axios(option)
-      .then(res => {
-        console.log(res)
-        if(res.status === 'ok') {
+    .then(res => {
+      console.log(res.data)
+      if(res.data.status === 'ok') {
+        if(res.data.token) {
           localStorage.token = res.data.token
-          resolve(res.data)
-        } else {
-          Message.error(res.msg)
-          reject(res.data)
         }
-      })    
-      .catch(
-        err => {
-          Message.error('网络异常')
-          console.log(err)
-        })
+        resolve(res.data)
+      }else{
+        Message.error(res.data.msg)
+        reject(res.data)
+      }
+    }).catch(err => {
+      Message.error('网络异常')
+      reject({ msg: '网络异常' })
+    })
   })
 }
 

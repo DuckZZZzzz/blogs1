@@ -1,17 +1,17 @@
 <template>
   <div class="to-do">
-    <div class="items">
+    <router-link class="items" to="/add">
       <i class="iconfont icon-duck1"></i>
       <h1>写博客</h1>
-    </div>
-    <div class="items">
+    </router-link>
+    <router-link class="items" to="/blogs">
       <i class="iconfont icon-duck2"></i>
       <h1>阅读</h1>
-    </div>
-    <div class="items">
+    </router-link>
+    <router-link class="items" to="/my">
       <i class="iconfont icon-duck3"></i>
       <h1>划水</h1>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
     }
   }
 }
+
+
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

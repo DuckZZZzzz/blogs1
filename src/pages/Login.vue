@@ -1,24 +1,31 @@
 <template>
   <div class="login">
-      <input v-model="input" placeholder="请输入用户名">
-      <input placeholder="请输入密码" v-model="input" show-password>
-      <button onclick="onLogin">登录</button>
+      <input v-model="username" placeholder="请输入用户名">
+      <input type="password" placeholder="请输入密码" v-model="password" show-password @keyup.enter="onLogin">
+      <button @click="onLogin">登录</button>
+      <p class="notice">没有账号？<router-link to="/register">注册新用户</router-link></p>
   </div>
 </template>
 
 <script>
-import Auth from '../api/auth'
+import { mapActions } from 'vuex'
+
 
 export default {
-
   data () {
     return {
-      input: ''
+      username: '',
+      password: ''
     }
   },
   methods: {
+    ...mapActions(['login']),
     onLogin() {
-      return Auth.login({username, password})
+      this.login({username: this.username, password: this.password})
+        .then(()=>{
+          this.$router.push({path: this.$route.query.redirect || '/blogs'})
+          console.log(this.$router, this.$route)
+        })
     }
   }
 }

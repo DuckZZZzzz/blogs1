@@ -1,28 +1,29 @@
 <template>
-  <div class="to-do">
-    <div class="items">
-      <i class="iconfont icon-duck1"></i>
-      <h1>写博客</h1>
-    </div>
-    <div class="items">
-      <i class="iconfont icon-duck2"></i>
-      <h1>阅读</h1>
-    </div>
-    <div class="items">
-      <i class="iconfont icon-duck3"></i>
-      <h1>划水</h1>
-    </div>
+  <div class="detail">
+    <section class="user-info">
+      <router-link to="/user">
+        <img :src="blog.user.avatar" :alt="blog.user.username">
+      </router-link>
+      <h3>{{title}}</h3>
+      <p>{{user.username}} 发布于{{friendlyDate(createdAt)}}</p>
+    </section>
+    <section class="article" v-html="markdown"></section>
   </div>
 </template>
 
 <script>
 export default {
-
   data () {
     return {
-
+      title: '',
+      article: '',
+      user: {},
+      rawcontent: {}
     }
-  }
+  },
+    created() {
+      
+    }
 }
 </script>
 

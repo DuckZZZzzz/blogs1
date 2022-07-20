@@ -3,29 +3,43 @@ import Router from 'vue-router'
 import Add from '@/pages/Add'
 import Blogs from '@/pages/Blogs'
 import Detail from '@/pages/Detail'
+import Edit from '@/pages/Edit'
 import Index from '@/pages/Index'
 import Login from '@/pages/Login'
 import My from '@/pages/My'
 import Register from '@/pages/Register'
+import User from '@/pages/User'
+
+import store from '../store'
 
 Vue.use(Router)
 
-export default new Router({
+
+const router = new Router({
   routes: [
     {
       path: '/add',
       name: 'Add',
-      component: Add
+      component: Add,
+      meta: {requireAuth: true}
     },
     {
       path: '/blogs',
       name: 'Blogs',
-      component: Blogs
+      component: Blogs,
+      meta: {requireAuth: true}
     },
     {
-      path: '/detail',
+      path: '/detail/:blogId',
       name: 'Detail',
-      component: Detail
+      component: Detail,
+      meta: {requireAuth: true}
+    },
+    {
+      path: '/edit/:blogId',
+      name: 'Edit',
+      component: Edit,
+      meta: {requireAuth: true}
     },
     {
       path: '/',
@@ -40,13 +54,36 @@ export default new Router({
     {
       path: '/my',
       name: 'My',
-      component: My
+      component: My,
+      meta: {requireAuth: true}
     },
     {
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/uer/:userId',
+      name: 'User',
+      component: User,
+      meta: {requireAuth: true}
     }
-
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() 
+  }
+})
+
+export default router
