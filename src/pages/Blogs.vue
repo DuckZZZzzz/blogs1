@@ -5,6 +5,7 @@
         <figure class="avatar">
           <img :src="blog.user.avatar" :alt="blog.user.username">
           <figcaption>{{blog.user.username}}</figcaption> 
+          <p>{{(blog.createdAt)}}</p>
         </figure>
         <h3>{{blog.title}}</h3>
         <p>{{blog.description}}</p>
@@ -26,14 +27,13 @@ export default {
     return {
       blogs: [],
       total: 1,
-      page: 1
+      page: 1,
     }
   },
   created() {
      this.page = parseInt(this.$route.query.page) 
      blog.getIndexBlogs({page: this.page})
       .then(res => {
-        console.log(this.$route)
         this.blogs = res.data
         this.total = res.total
         this.page = res.page

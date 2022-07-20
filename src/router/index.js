@@ -11,6 +11,9 @@ import Register from '@/pages/Register'
 import User from '@/pages/User'
 
 import store from '../store'
+import {mapActions} from 'vuex'
+window.store = store
+
 
 Vue.use(Router)
 
@@ -21,25 +24,25 @@ const router = new Router({
       path: '/add',
       name: 'Add',
       component: Add,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     },
     {
       path: '/blogs',
       name: 'Blogs',
       component: Blogs,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     },
     {
       path: '/detail/:blogId',
       name: 'Detail',
       component: Detail,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     },
     {
       path: '/edit/:blogId',
       name: 'Edit',
       component: Edit,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     },
     {
       path: '/',
@@ -55,7 +58,7 @@ const router = new Router({
       path: '/my',
       name: 'My',
       component: My,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     },
     {
       path: '/register',
@@ -66,24 +69,40 @@ const router = new Router({
       path: '/uer/:userId',
       name: 'User',
       component: User,
-      meta: {requireAuth: true}
+      meta: {requiresAuth: true}
     }
   ]
 })
 
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters.isLogin) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
+    const promise = store.dispatch('checkLogin')
+    console.log(promise,'...')
+    promise.then(isLogin=>{
+      if (!isLogin) {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      } else { 
+        next()
+      }
+    })
+    .catch(res=>{
+      if(res.msg === '请先登录') {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      }
+    })
   } else {
     next() 
   }
 })
+
+
+
 
 export default router

@@ -1,0 +1,3 @@
+function friendlyDate(datsStr) {
+  
+}
