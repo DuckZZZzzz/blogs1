@@ -66,7 +66,7 @@ const router = new Router({
       component: Register
     },
     {
-      path: '/uer/:userId',
+      path: '/user/:userId',
       name: 'User',
       component: User,
       meta: {requiresAuth: true}

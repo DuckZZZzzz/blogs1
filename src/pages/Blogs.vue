@@ -42,6 +42,7 @@ export default {
         this.blogs = res.data
         this.total = res.total
         this.page = res.page
+        this.totalPage = res.totalPage
       })
   },
   methods: {
@@ -78,11 +79,7 @@ export default {
       h3 {
         margin-bottom: 0;
       }
-      p {
-        margin-top: 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
+
       }
     }
 
