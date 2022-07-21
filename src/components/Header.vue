@@ -91,6 +91,7 @@
       background: linear-gradient(145deg,#e3fffd 0,#b7e9e6 100%);
       .duck {
         flex: 1;
+        padding-top: 15px;
       }
       p {
         width: 600px;
@@ -123,6 +124,8 @@
       .duck {
         flex: 1;
         justify-content: flex-start;
+        box-sizing: border-box;
+        padding: 10px;
         height: 98px;
         align-items: center;
       }

@@ -24,14 +24,14 @@ export default function request(type='GET', url, data={}) {
  
     axios(option)
     .then(res => {
-      console.log(res.data)
+      console.log(res.data,'...')
       if(res.data.status === 'ok') {
         if(res.data.token) {
           localStorage.token = res.data.token
         }
         resolve(res.data)
       }else{
-        Message.error(res.data.msg)
+
         reject(res.data)
       }
     }).catch(err => {

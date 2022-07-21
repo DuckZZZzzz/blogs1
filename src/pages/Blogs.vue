@@ -1,18 +1,23 @@
 <template>
   <div id="blogs">
     <section class="blog-posts"> 
-      <router-link class="item" v-for="blog in blogs" :to="`/detail/`">
+      <router-link class="item" v-for="blog in blogs" :to="`/detail/${blog.id}`">
         <figure class="avatar">
           <img :src="blog.user.avatar" :alt="blog.user.username">
           <figcaption>{{blog.user.username}}</figcaption> 
-          <p>{{(blog.createdAt)}}</p>
+          <p>{{friendlyDate(blog.createdAt)}}</p>
         </figure>
         <h3>{{blog.title}}</h3>
-        <p>{{blog.description}}</p>
+        <p style="word-break: break-all;">{{(blog.description)}}</p>
       </router-link>
     </section>
     <section class="pagination">
-
+      <el-pagination
+        layout="prev, pager, next"
+        :total="total"
+        :current-page="page"
+        @current-change="onPageChange">
+      </el-pagination>
     </section>
   </div>
 </template>
@@ -26,12 +31,12 @@ export default {
   data() {
     return {
       blogs: [],
-      total: 1,
+      total: 0,
       page: 1,
     }
   },
   created() {
-     this.page = parseInt(this.$route.query.page) 
+     this.page = parseInt(this.$route.query.page) || 1
      blog.getIndexBlogs({page: this.page})
       .then(res => {
         this.blogs = res.data
@@ -40,7 +45,16 @@ export default {
       })
   },
   methods: {
-
+    onPageChange(newPage) {
+     blog.getIndexBlogs({page: newPage})
+      .then(res => {
+        console.log(res, '...')
+        this.blogs = res.data
+        this.total = res.total
+        this.page = res.page
+        this.$router.push({path: '/blogs', query: {page: newPage}})
+      })
+    }
   }
 }
 
@@ -48,12 +62,12 @@ export default {
 
 <style lang="less" scoped>
   #blogs {
-    padding: 0 150px;
+
     .blog-posts {
       .item {
         display: grid;
         align-items: flex-start;
-        grid: auto auto / 80px 1fr;
+        grid: auto auto / 100px 1fr;
       .avatar {
         width: 50px;
         grid-column: 1;
@@ -66,8 +80,14 @@ export default {
       }
       p {
         margin-top: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
       }
+    }
+
+    .pagination {
+      text-align: center;
     }
   }
 

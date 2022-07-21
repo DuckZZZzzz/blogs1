@@ -1,42 +1,64 @@
 <template>
   <div class="detail">
     <section class="user-info">
-      <router-link to="/user">
-        <img :src="blog.user.avatar" :alt="blog.user.username">
+      <router-link :to='`/user/${user.id}`'>
+        <img :src="user.avatar" :alt="user.username">
       </router-link>
-      <h3>{{title}}</h3>
-      <p>{{user.username}} 发布于{{friendlyDate(createdAt)}}</p>
+      <div class="title">
+        <h3>{{title}}</h3>
+        <p>{{user.username}} 发布于{{friendlyDate(createdAt)}}</p>
+      </div>
     </section>
-    <section class="article" v-html="markdown"></section>
+    <hr>
+    <section class="article" v-html="markdown" style="word-break: break-all;"></section>
   </div>
 </template>
 
 <script>
+
+import blog from '@/api/blog'
+import marked from 'marked'
+
 export default {
   data () {
     return {
       title: '',
-      article: '',
+      createdAt: '',
       user: {},
-      rawcontent: {}
+      rawContent: ''
     }
   },
-    created() {
-      
+  created() {
+    blog.getDetail({ blogId: this.$route.params.blogId })
+      .then(res=>{
+        this.title = res.data.title
+        this.createdAt = res.data.createdAt
+        this.rawContent = res.data.content
+        this.user = res.data.user
+
+      })
+  },
+  computed: {
+    markdown() {
+      return marked(this.rawContent)
     }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.to-do {
-  padding: 50px;
-  display: flex;
-  justify-content: space-around;
-}
-.items {
-  width: 200px;
-  text-align: center;
-}
+<style scoped lang="less">
+  .user-info {
+    display: flex;
+
+    img {
+    width: 80px;
+    margin: 10px 0;
+    text-align: center;
+    margin-right: 20px;
+  }
+
+  }
+
 
 </style>
