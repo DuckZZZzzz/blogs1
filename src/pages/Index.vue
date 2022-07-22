@@ -42,4 +42,8 @@ export default {
   text-align: center;
 }
 
+h1 {
+  user-select: none;
+}
+
 </style>

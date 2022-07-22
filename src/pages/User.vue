@@ -13,11 +13,12 @@
           <span class="month">{{splitDate(blog.createdAt).month}}月</span>
         </div>
         <h3 style="word-break: break-all;">{{blog.title}}</h3>
-        <p style="word-break: break-all;">{{blog.description}}</p>
+        <p class="description" style="word-break: break-all;">{{blog.description}}</p>
       </router-link>
     </section>
     <section class="pagination">
       <el-pagination
+        page-size="20"
         layout="prev, pager, next"
         :total="total"
         :current-page="page"

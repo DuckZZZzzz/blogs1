@@ -31,7 +31,7 @@ export default function request(type='GET', url, data={}) {
         }
         resolve(res.data)
       }else{
-
+        Message.error(res.data.msg)
         reject(res.data)
       }
     }).catch(err => {

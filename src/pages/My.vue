@@ -13,7 +13,7 @@
           <span class="month">{{splitDate(blog.createdAt).month}}月</span>
         </div>
         <h3 style="word-break: break-all;">{{blog.title}}</h3>
-        <p style="word-break: break-all;">{{blog.description}}</p>
+        <p class="description" style="word-break: break-all;">{{blog.description}}</p>
         <div class="actions">
           <router-link :to="`/edit/${blog.id}`">编辑</router-link>
           <a href="#" @click.prevent="onDelete(blog.id)">删除</a>
@@ -22,6 +22,7 @@
     </section>
         <section class="pagination">
       <el-pagination
+        page-size="20"
         layout="prev, pager, next"
         :total="total"
         :current-page="page"
