@@ -1,5 +1,8 @@
 # blogs1
 
+#preview
+https://duckzzzzzz.github.io/Blogs1-preview/#/
+
 > A Vue.js project
 
 ## Build Setup
