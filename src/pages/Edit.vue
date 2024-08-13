@@ -14,7 +14,7 @@
         <label>是否展示到首页</label>
         <el-switch v-model="atIndex" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
     </p>
-    <el-button @click="onCreate">确定</el-button>
+    <el-button @click="onEdit">确定</el-button>
   </div>
 </template>
 
@@ -30,9 +30,20 @@ export default {
       atIndex: ''
     }
   },
+  created() {
+    console.log(this.$route)
+    this.blogId = this.$route.params.blogId
+    blog.getDetail({ blogId: this.$route.params.blogId })
+      .then(res=>{
+        this.title = res.data.title
+        this.description = res.data.description
+        this.content = res.data.content
+        this.atIndex = res.data.atIndex
+      })
+  },
   methods: {
-    onCreate() {
-      blog.createBlog({ title: this.title, content: this.content , description: this.description, atIndex: this.atIndex}) 
+    onEdit() {
+      blog.updateBlog({blogId: this.blogId}, { title: this.title, content: this.content , description: this.description, atIndex: this.atIndex}) 
         .then(res => {
           this.$message.success(res.msg)
           this.$router.push({ path: `/detail/${res.data.id}`})

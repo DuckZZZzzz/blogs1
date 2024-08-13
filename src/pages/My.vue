@@ -22,7 +22,7 @@
     </section>
         <section class="pagination">
       <el-pagination
-        page-size="20"
+        :page-size=20
         layout="prev, pager, next"
         :total="total"
         :current-page="page"
@@ -53,7 +53,6 @@ export default {
     this.page = this.$route.query.page || 1
     blog.getBlogsByUserId(this.user.id, { page: this.page }) 
       .then(res => {
-        console.log(res,'...。。。')
         this.page = res.page
         this.total = res.total
         this.blogs = res.data
@@ -81,6 +80,7 @@ export default {
     },
 
     async onDelete(blogId) {
+      console.log('this是',this,'this.$route',this.$route, 'this.$router',this.$router)
       await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

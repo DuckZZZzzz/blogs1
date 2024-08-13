@@ -17,7 +17,7 @@
     </section>
     <section class="pagination">
       <el-pagination
-        page-size="20"
+        :page-size=20
         layout="prev, pager, next"
         :total="total"
         :current-page="page"
@@ -51,6 +51,7 @@ export default {
   },
   methods: {
     onPageChange(newPage) {
+      console.log('????newpage',newPage)
       blog.getIndexBlogs({ page: newPage }).then((res) => {
         console.log(res, "...");
         this.blogs = res.data;

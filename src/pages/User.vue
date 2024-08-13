@@ -18,7 +18,7 @@
     </section>
     <section class="pagination">
       <el-pagination
-        page-size="20"
+        :page-size=20
         layout="prev, pager, next"
         :total="total"
         :current-page="page"
